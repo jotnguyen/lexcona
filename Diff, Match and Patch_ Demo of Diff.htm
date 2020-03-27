@@ -18,8 +18,10 @@ function launch() {
   var text2 = document.getElementById('text2').value;
   dmp.Diff_Timeout = parseFloat(document.getElementById('timeout').value);
   dmp.Diff_EditCost = parseFloat(document.getElementById('editcost').value);
-
+  // dmp object holds the diffs
   var ms_start = (new Date()).getTime();
+  // d is the diffs between the two texts
+  // diff_main("Good dog", "Bad dog") → [(-1, "Goo"), (1, "Ba"), (0, "d dog")]
   var d = dmp.diff_main(text1, text2);
   var ms_end = (new Date()).getTime();
 
@@ -28,9 +30,16 @@ function launch() {
   }
   if (document.getElementById('efficiency').checked) {
     dmp.diff_cleanupEfficiency(d);
-    console.log(dmp.diff_cleanupEfficiency(d))
+    
   }
+  console.log(d)
   var ds = dmp.diff_prettyHtml(d);
+  for (change in d){
+    console.log(d[change])
+    if(d[change][0] == -1){
+      console.log(d[change][1])
+    }
+  }
   document.getElementById('outputdiv').innerHTML = ds + '<BR>Time: ' + (ms_end - ms_start) / 1000 + 's';
 }
 </script>
@@ -39,16 +48,10 @@ function launch() {
 <table width="100%"><tbody><tr>
   <td width="50%">
 <h3>Text Version 1:</h3>
-<textarea id="text1" style="width: 100%" rows="10">I am the very model of a modern Major-General,
-I've information vegetable, animal, and mineral,
-I know the kings of England, and I quote the fights historical,
-From Marathon to Waterloo, in order categorical.</textarea></td>
+<textarea id="text1" style="width: 100%" rows="10">On [[DATE]] John said he would</textarea></td>
   <td width="50%">
 <h3>Text Version 2:</h3>
-<textarea id="text2" style="width: 100%" rows="10">I am the very model of a cartoon individual,
-My animation's comical, unusual, and whimsical,
-I'm quite adept at funny gags, comedic theory I have read,
-From wicked puns and stupid jokes to anvils that drop on your head.</textarea></td>
+<textarea id="text2" style="width: 100%" rows="10">On January 21st, 2019 John said he would</textarea></td>
 </tr></tbody></table>
 
 <h3>Diff timeout:</h3>
