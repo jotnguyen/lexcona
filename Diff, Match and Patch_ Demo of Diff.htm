@@ -1,5 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<html><head>
+  <link rel="stylesheet" type="text/css" href="./styles.css">
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
   <title>Diff</title>
   <script src="./Diff, Match and Patch_ Demo of Diff_files/diff_match_patch.js"></script>
 </head>
@@ -34,13 +36,25 @@ function launch() {
   }
   console.log(d)
   var ds = dmp.diff_prettyHtml(d);
-  for (change in d){
-    console.log(d[change])
-    if(d[change][0] == -1){
-      console.log(d[change][1])
+  let warning = ""
+  for (i = 0; i < d.length - 1 ; i++){
+    console.log(d[i])
+    
+    if(d[i][0] == -1){
+      console.log(d[i][1])
+      let re = /(Jan(uary)?|Feb(ruary)?|Mar(ch)?|Apr(il)?|May|Jun(e)?|Jul(y)?|Aug(ust)?|Sep(tember)?|Oct(ober)?|Nov(ember)?|Dec(ember)?)\s+\d{1,2},\s+\d{4}/;
+
+      console.log(d[i + 1][1])
+      let testresult = re.test(d[i+1][1]);
+      console.log(testresult)
+
+      warning = warning + d[i][1] + " was changed to " + d[i + 1][1];
+      warning = warning + "<br>This is a routine change!~";
+      console.log(warning)
     }
   }
   document.getElementById('outputdiv').innerHTML = ds + '<BR>Time: ' + (ms_end - ms_start) / 1000 + 's';
+  document.getElementById('myPopup').innerHTML = warning
 }
 </script>
 
@@ -51,7 +65,7 @@ function launch() {
 <textarea id="text1" style="width: 100%" rows="10">On [[DATE]] John said he would</textarea></td>
   <td width="50%">
 <h3>Text Version 2:</h3>
-<textarea id="text2" style="width: 100%" rows="10">On January 21st, 2019 John said he would</textarea></td>
+<textarea id="text2" style="width: 100%" rows="10">On January 21, 2019 John said he would</textarea></td>
 </tr></tbody></table>
 
 <h3>Diff timeout:</h3>
@@ -78,6 +92,14 @@ edit cost: <input type="text" size="3" maxlength="5" value="4" id="editcost">
 <div id="outputdiv"></div>
 
 <hr>
-
-
+<div class="popup" onclick="myFunction()">Click me to see routine changes!
+  <span class="popuptext" id="myPopup"></span>
+</div>
+<script>
+  // When the user clicks on <div>, open the popup
+  function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+  }
+</script>
 </body></html>
