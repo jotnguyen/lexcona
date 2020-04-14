@@ -13,6 +13,16 @@
 
 <script>
 var dmp = new diff_match_patch();
+function critical_change(){
+  let critical = {
+    "": "",
+    "":"",
+  }
+  // make a list of 
+  // liquidated damages:
+  // definition
+  //
+}
 
 function launch() {
   
@@ -48,7 +58,7 @@ function launch() {
       let testresult = re.test(d[i+1][1]);
       console.log(testresult)
 
-      warning = warning + d[i][1] + " was changed to " + d[i + 1][1];
+      warning = "<div class='education-block'>"+warning + d[i][1] + " was changed to " + d[i + 1][1] + "</div>";
       warning = warning + "<br>This is a routine change!~";
       console.log(warning)
     }
@@ -62,10 +72,29 @@ function launch() {
 <table width="100%"><tbody><tr>
   <td width="50%">
 <h3>Text Version 1:</h3>
-<textarea id="text1" style="width: 100%" rows="10">On [[DATE]] John said he would</textarea></td>
+<textarea id="text1" style="width: 100%" rows="10">"This Non-Disclosure Agreement is made on [EFFECTIVE DATE] (the ""Effective Date"") between
+  [PARTY A NAME]
+  and
+  [PARTY B NAME].
+  Together "the Parties"
+
+  "Liquidated damages
+  Liquidated damages.  If the Recipient breaches or threatens a breach of any obligations in this agreement it will pay to the Discloser the sum of USD1000 regardless of the nature or extent of the breach, and regardless of whether the Discloser has suffered any loss as a result of the breach or threatened breach.
+  Burden of proof.  It will at all times be for the Recipient to prove that it has not breached or threatened to breach its obligations under this agreement.   
+  Security. In order to ensure that the Recipient will be able to pay damages, the Recipient will provide to the Discloser an evergreen Letter of Credit from a bank covering the period from the start of the Project and lasting 4 calendar months thereafter."
+  "</textarea></td>
   <td width="50%">
 <h3>Text Version 2:</h3>
-<textarea id="text2" style="width: 100%" rows="10">On January 21, 2019 John said he would</textarea></td>
+<textarea id="text2" style="width: 100%" rows="10">"This Non-Disclosure Agreement is made on 1st February 2020 (the ""Effective Date"") between
+  Rodrigo Paes de Barros of PDB Law LLP ("PDB") and
+  Justin Chae of HumanContractDesign Ltd. ("HCD")
+  Together "the Parties"
+
+  "Liquidated damages
+Liquidated damages.  If the Recipient breaches or threatens a breach of any obligations in this agreement it will pay to the Discloser the sum of USD1000 regardless of the nature or extent of the breach, and regardless of whether the Discloser has suffered any loss as a result of the breach or threatened breach.
+Burden of proof.  It will at all times be for the Recipient to prove that it has not breached or threatened to breach its obligations under this agreement.   
+Security. In order to ensure that the Recipient will be able to pay damages, the Recipient will provide to the Discloser an evergreen Letter of Credit from a bank covering the period from the start of the Project and lasting 4 calendar months thereafter."
+  "</textarea></td>
 </tr></tbody></table>
 
 <h3>Diff timeout:</h3>
